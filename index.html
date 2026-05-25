@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 Organisational Culture Models</title>
+  <link rel="stylesheet" href="culture-styles.css" />
+</head>
+<body>
+
+  <div class="top-bar" id="topBar"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="nav-brand">
+        <span class="brand-box">10</span>
+        <span class="brand-label">Culture<br>Models</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#sec-understand" class="nav-link" data-s="sec-understand">Understand</a>
+        <a href="#sec-classify"   class="nav-link" data-s="sec-classify">Classify</a>
+        <a href="#sec-change"     class="nav-link" data-s="sec-change">Change</a>
+        <a href="#overview"       class="nav-link">Overview</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mob-menu" id="mobMenu">
+    <a href="#sec-understand" class="mob-link">01 — Understand Culture</a>
+    <a href="#sec-classify"   class="mob-link">02 — Classify Culture</a>
+    <a href="#sec-change"     class="mob-link">03 — Change Culture</a>
+    <a href="#overview"       class="mob-link">All 10 Models</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-tag">Organisational Leadership Series</div>
+        <h1 class="hero-title">
+          <span class="ht-top">10 Culture</span>
+          <span class="ht-bottom">Models</span>
+        </h1>
+        <p class="hero-sub">Every leader needs to understand the invisible forces that drive behaviour, shape decisions, and ultimately determine whether strategy succeeds or fails.</p>
+        <div class="hero-counts">
+          <div class="hcount"><strong>10</strong><span>Models</span></div>
+          <div class="hcount-div"></div>
+          <div class="hcount"><strong>3</strong><span>Phases</span></div>
+          <div class="hcount-div"></div>
+          <div class="hcount"><strong>50+</strong><span>Yrs Research</span></div>
+        </div>
+        <div class="hero-sections">
+          <a href="#sec-understand" class="hs-pill hs-blue">01 Understand</a>
+          <a href="#sec-classify"   class="hs-pill hs-amber">02 Classify</a>
+          <a href="#sec-change"     class="hs-pill hs-teal">03 Change</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-grid-cards" id="heroCards"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 1: UNDERSTAND -->
+  <section class="section" id="sec-understand" data-accent="blue">
+    <div class="sec-inner">
+      <div class="sec-heading">
+        <div class="sec-badge">01</div>
+        <div class="sec-head-text">
+          <h2 class="sec-title">Understand Culture</h2>
+          <p class="sec-desc">Culture is largely invisible — it lives in assumptions, habits, and unspoken rules. These three models reveal what culture actually is, how it is structured, and which dimensions vary most across organisations and nations.</p>
+        </div>
+      </div>
+      <div class="model-grid" id="grid-understand"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CLASSIFY -->
+  <section class="section" id="sec-classify" data-accent="amber">
+    <div class="sec-inner">
+      <div class="sec-heading">
+        <div class="sec-badge">02</div>
+        <div class="sec-head-text">
+          <h2 class="sec-title">Classify Culture</h2>
+          <p class="sec-desc">Once you can see culture, you need to be able to name it. These four typology models give leaders a shared language to diagnose where their organisation sits — and what that means for leadership, strategy, and performance.</p>
+        </div>
+      </div>
+      <div class="model-grid" id="grid-classify"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: CHANGE -->
+  <section class="section" id="sec-change" data-accent="teal">
+    <div class="sec-inner">
+      <div class="sec-heading">
+        <div class="sec-badge">03</div>
+        <div class="sec-head-text">
+          <h2 class="sec-title">Change Culture</h2>
+          <p class="sec-desc">Understanding and classifying culture is not enough — leaders must be able to change it. These three models provide the practical frameworks for navigating cultural transformation without destroying what works.</p>
+        </div>
+      </div>
+      <div class="model-grid" id="grid-change"></div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW TABLE -->
+  <section class="overview" id="overview">
+    <div class="overview-inner">
+      <div class="ov-head">
+        <p class="ov-label">All 10 at a glance</p>
+        <h2 class="ov-title">Complete Overview</h2>
+      </div>
+      <div class="ov-grid" id="ovGrid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-box">10</span>
+        <span class="footer-text">Organisational Culture Models</span>
+      </div>
+      <p class="footer-note">Click any model to explore the full breakdown.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-panel" id="modalPanel">
+      <button class="modal-close" id="modalClose">Close &times;</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">&#8593;</button>
+
+  <script src="culture-app.js"></script>
+</body>
+</html>

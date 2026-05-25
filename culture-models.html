@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 Organisational Culture Models</title>
+  <style>
+/* ============================================================
+   10 ORGANISATIONAL CULTURE MODELS  |  culture-styles.css
+   Bold geometric — deep charcoal, system fonts, no italics
+   ============================================================ */
+
+:root {
+  /* Base */
+  --ink:      #12141a;
+  --ink-2:    #2e3340;
+  --ink-3:    #5c6270;
+  --ink-4:    #9aa0ad;
+  --bg:       #f4f5f7;
+  --bg-2:     #eceef2;
+  --white:    #ffffff;
+  --border:   #dde0e8;
+
+  /* Accents */
+  --blue:     #1a4fd6;
+  --blue-mid: #2e63e8;
+  --blue-lt:  #dce8ff;
+  --blue-bg:  #f0f5ff;
+
+  --amber:    #b85c00;
+  --amber-mid:#d06a00;
+  --amber-lt: #fde8cc;
+  --amber-bg: #fff8f0;
+
+  --teal:     #006b5e;
+  --teal-mid: #008573;
+  --teal-lt:  #ccf0ea;
+  --teal-bg:  #f0faf8;
+
+  --gold:     #c8922a;
+
+  /* Typography — system only, no italics */
+  --font: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --nav-h: 68px;
+  --max:   1300px;
+  --rad:   10px;
+  --rad-lg:18px;
+  --t:     0.25s;
+  --ease:  cubic-bezier(.4,0,.2,1);
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:var(--font); background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+a { color:inherit; text-decoration:none; }
+button { cursor:pointer; border:none; background:none; font-family:var(--font); }
+em, i { font-style:normal; font-weight:600; }
+
+/* ── TOP PROGRESS BAR ──────────────────────────────────── */
+.top-bar { position:fixed; top:0; left:0; z-index:3000; height:4px; width:0; background:linear-gradient(90deg, var(--blue), var(--teal)); transition:width .1s linear; }
+
+/* ── NAV ────────────────────────────────────────────────── */
+.nav { position:fixed; top:0; left:0; right:0; z-index:1000; height:var(--nav-h); background:var(--ink); border-bottom:3px solid var(--blue); transition:border-color var(--t); }
+.nav.at-classify { border-bottom-color:var(--amber); }
+.nav.at-change   { border-bottom-color:var(--teal); }
+.nav-inner { max-width:var(--max); margin:0 auto; height:100%; padding:0 2.5rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+.nav-brand { display:flex; align-items:center; gap:.75rem; flex-shrink:0; }
+.brand-box { width:40px; height:40px; background:var(--blue); color:var(--white); font-size:1.1rem; font-weight:800; display:flex; align-items:center; justify-content:center; border-radius:6px; flex-shrink:0; }
+.brand-label { font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55); line-height:1.3; }
+.nav-links { display:flex; gap:.2rem; }
+.nav-link { font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.45); padding:.5rem 1rem; border-radius:6px; transition:all var(--t); }
+.nav-link:hover, .nav-link.active { color:var(--white); background:rgba(255,255,255,.1); }
+.burger { display:none; flex-direction:column; gap:5px; padding:8px; flex-shrink:0; }
+.burger span { display:block; height:2px; background:rgba(255,255,255,.7); border-radius:2px; transition:all var(--t); }
+.burger span:nth-child(1) { width:22px; }
+.burger span:nth-child(2) { width:16px; }
+.burger span:nth-child(3) { width:22px; }
+.burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); width:22px; }
+.burger.open span:nth-child(2) { opacity:0; }
+.burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); width:22px; }
+
+.mob-menu { display:none; position:fixed; top:var(--nav-h); left:0; right:0; z-index:999; background:var(--ink-2); flex-direction:column; transform:translateY(-110%); opacity:0; transition:all var(--t); }
+.mob-menu.open { transform:translateY(0); opacity:1; }
+.mob-link { font-size:.9rem; font-weight:600; letter-spacing:.04em; color:rgba(255,255,255,.7); padding:1.1rem 2rem; border-bottom:1px solid rgba(255,255,255,.07); transition:all var(--t); }
+.mob-link:hover { color:white; background:rgba(255,255,255,.06); }
+
+/* ── HERO ───────────────────────────────────────────────── */
+.hero { padding-top:var(--nav-h); background:var(--ink); position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:0; right:0; width:50%; height:100%; background:linear-gradient(135deg, rgba(26,79,214,.15) 0%, transparent 60%); pointer-events:none; }
+.hero::after  { content:''; position:absolute; bottom:0; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--blue) 33%, var(--amber) 66%, var(--teal) 100%); }
+.hero-inner { max-width:var(--max); margin:0 auto; padding:5rem 2.5rem 4rem; display:grid; grid-template-columns:1fr 420px; gap:4rem; align-items:center; }
+
+.hero-tag { font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:1.5rem; display:flex; align-items:center; gap:.6rem; }
+.hero-tag::before { content:''; display:block; width:24px; height:2px; background:var(--blue); }
+
+.hero-title { font-size:clamp(3.5rem,7vw,6.5rem); font-weight:900; line-height:.95; letter-spacing:-.04em; margin-bottom:1.75rem; }
+.ht-top { display:block; color:var(--white); opacity:0; animation:upIn .6s .1s forwards; }
+.ht-bottom { display:block; color:var(--blue); opacity:0; animation:upIn .6s .2s forwards; }
+
+.hero-sub { font-size:1.05rem; font-weight:400; line-height:1.75; color:rgba(255,255,255,.55); max-width:480px; margin-bottom:2.5rem; opacity:0; animation:upIn .5s .35s forwards; }
+
+.hero-counts { display:flex; align-items:center; gap:2rem; margin-bottom:2.5rem; opacity:0; animation:upIn .5s .45s forwards; }
+.hcount strong { display:block; font-size:2rem; font-weight:900; color:var(--white); line-height:1; }
+.hcount span { display:block; font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-top:.2rem; }
+.hcount-div { width:1px; height:36px; background:rgba(255,255,255,.12); }
+
+.hero-sections { display:flex; gap:.6rem; opacity:0; animation:upIn .5s .55s forwards; }
+.hs-pill { font-size:.75rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; padding:.45rem 1.1rem; border-radius:6px; transition:all var(--t); }
+.hs-blue  { background:rgba(26,79,214,.25);  color:#7da8ff; border:1px solid rgba(26,79,214,.4); }
+.hs-amber { background:rgba(184,92,0,.25);   color:#ffb870; border:1px solid rgba(184,92,0,.4); }
+.hs-teal  { background:rgba(0,107,94,.25);   color:#5de0cf; border:1px solid rgba(0,107,94,.4); }
+.hs-pill:hover { transform:translateY(-2px); }
+
+.hero-right { opacity:0; animation:upIn .6s .3s forwards; }
+.hero-grid-cards { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
+.hgc { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:var(--rad); padding:1.1rem; cursor:pointer; transition:all var(--t); }
+.hgc:hover { background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.2); transform:translateY(-3px); }
+.hgc-num { font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem; }
+.hgc-name { font-size:.85rem; font-weight:700; color:var(--white); line-height:1.25; }
+
+/* ── SECTIONS ───────────────────────────────────────────── */
+.section { padding:6rem 0; }
+[data-accent="blue"]  { background:var(--blue-bg); }
+[data-accent="amber"] { background:var(--amber-bg); }
+[data-accent="teal"]  { background:var(--teal-bg); }
+
+.sec-inner { max-width:var(--max); margin:0 auto; padding:0 2.5rem; }
+.sec-heading { display:flex; align-items:flex-start; gap:2rem; margin-bottom:3.5rem; padding-bottom:2.5rem; border-bottom:3px solid; }
+[data-accent="blue"]  .sec-heading { border-color:var(--blue); }
+[data-accent="amber"] .sec-heading { border-color:var(--amber); }
+[data-accent="teal"]  .sec-heading { border-color:var(--teal); }
+
+.sec-badge { font-size:4rem; font-weight:900; line-height:1; flex-shrink:0; }
+[data-accent="blue"]  .sec-badge { color:var(--blue-lt); }
+[data-accent="amber"] .sec-badge { color:var(--amber-lt); }
+[data-accent="teal"]  .sec-badge { color:var(--teal-lt); }
+
+.sec-title { font-size:clamp(2rem,3.5vw,2.8rem); font-weight:900; letter-spacing:-.03em; margin-bottom:.8rem; }
+[data-accent="blue"]  .sec-title { color:var(--blue); }
+[data-accent="amber"] .sec-title { color:var(--amber); }
+[data-accent="teal"]  .sec-title { color:var(--teal); }
+
+.sec-desc { font-size:.95rem; line-height:1.8; color:var(--ink-3); max-width:580px; font-weight:400; }
+
+/* ── MODEL CARDS ────────────────────────────────────────── */
+.model-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(360px,1fr)); gap:1.25rem; }
+
+.model-card { background:var(--white); border-radius:var(--rad-lg); border:1px solid var(--border); overflow:hidden; cursor:pointer; transition:transform var(--t), box-shadow var(--t), border-color var(--t); opacity:0; transform:translateY(24px); }
+.model-card.show { opacity:1; transform:translateY(0); }
+.model-card:hover { transform:translateY(-5px); border-color:transparent; }
+[data-accent="blue"]  .model-card:hover { box-shadow:0 12px 40px rgba(26,79,214,.18); }
+[data-accent="amber"] .model-card:hover { box-shadow:0 12px 40px rgba(184,92,0,.15); }
+[data-accent="teal"]  .model-card:hover { box-shadow:0 12px 40px rgba(0,107,94,.15); }
+
+.card-stripe { height:5px; }
+[data-accent="blue"]  .card-stripe { background:var(--blue); }
+[data-accent="amber"] .card-stripe { background:var(--amber); }
+[data-accent="teal"]  .card-stripe { background:var(--teal); }
+
+.card-body { padding:1.6rem; }
+.card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:.9rem; }
+.card-num { font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+[data-accent="blue"]  .card-num { color:var(--blue); }
+[data-accent="amber"] .card-num { color:var(--amber); }
+[data-accent="teal"]  .card-num { color:var(--teal); }
+
+.card-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1rem; font-weight:900; flex-shrink:0; }
+[data-accent="blue"]  .card-icon { background:var(--blue-lt); color:var(--blue); }
+[data-accent="amber"] .card-icon { background:var(--amber-lt); color:var(--amber); }
+[data-accent="teal"]  .card-icon { background:var(--teal-lt); color:var(--teal); }
+
+.card-name { font-size:1.25rem; font-weight:800; letter-spacing:-.02em; color:var(--ink); margin-bottom:.3rem; line-height:1.2; }
+.card-question { font-size:.85rem; font-weight:500; color:var(--ink-3); margin-bottom:1rem; line-height:1.5; }
+.card-summary { font-size:.875rem; line-height:1.72; color:var(--ink-2); margin-bottom:1.25rem; font-weight:400; }
+.card-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1.25rem; }
+.card-tag { font-size:.65rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.22rem .6rem; border-radius:4px; }
+[data-accent="blue"]  .card-tag { background:var(--blue-lt); color:var(--blue-mid); }
+[data-accent="amber"] .card-tag { background:var(--amber-lt); color:var(--amber-mid); }
+[data-accent="teal"]  .card-tag { background:var(--teal-lt); color:var(--teal-mid); }
+
+.card-footer { border-top:1px solid var(--border); padding-top:1.1rem; display:flex; align-items:center; justify-content:space-between; }
+.card-roles { font-size:.72rem; font-weight:500; color:var(--ink-4); }
+.card-btn { font-size:.72rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; padding:.38rem .85rem; border-radius:6px; border:2px solid; transition:all var(--t); }
+[data-accent="blue"]  .card-btn { color:var(--blue); border-color:var(--blue); }
+[data-accent="blue"]  .card-btn:hover { background:var(--blue); color:var(--white); }
+[data-accent="amber"] .card-btn { color:var(--amber); border-color:var(--amber); }
+[data-accent="amber"] .card-btn:hover { background:var(--amber); color:var(--white); }
+[data-accent="teal"]  .card-btn { color:var(--teal); border-color:var(--teal); }
+[data-accent="teal"]  .card-btn:hover { background:var(--teal); color:var(--white); }
+
+/* ── OVERVIEW ───────────────────────────────────────────── */
+.overview { background:var(--ink); padding:6rem 0; }
+.overview-inner { max-width:var(--max); margin:0 auto; padding:0 2.5rem; }
+.ov-label { font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:.6rem; }
+.ov-title { font-size:clamp(2rem,4vw,3rem); font-weight:900; letter-spacing:-.03em; color:var(--white); margin-bottom:3rem; }
+.ov-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.07); border-radius:var(--rad-lg); overflow:hidden; }
+.ov-cell { background:var(--ink); padding:1.5rem 1.75rem; cursor:pointer; transition:background var(--t); display:flex; gap:1.25rem; align-items:flex-start; }
+.ov-cell:hover { background:rgba(255,255,255,.05); }
+.ov-bar { width:3px; flex-shrink:0; border-radius:2px; margin-top:.2rem; min-height:40px; }
+.ov-n { font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.4rem; }
+.ov-name { font-size:1rem; font-weight:800; color:var(--white); margin-bottom:.3rem; line-height:1.2; }
+.ov-q { font-size:.78rem; font-weight:400; color:rgba(255,255,255,.4); line-height:1.5; }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.footer { background:var(--ink-2); border-top:1px solid rgba(255,255,255,.07); padding:2rem 2.5rem; }
+.footer-inner { max-width:var(--max); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.footer-left { display:flex; align-items:center; gap:.75rem; }
+.footer-box { width:32px; height:32px; background:var(--blue); color:white; font-size:.9rem; font-weight:900; display:flex; align-items:center; justify-content:center; border-radius:5px; flex-shrink:0; }
+.footer-text { font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.35); }
+.footer-note { font-size:.72rem; font-weight:400; color:rgba(255,255,255,.2); }
+
+/* ── MODAL ──────────────────────────────────────────────── */
+.modal-overlay { position:fixed; inset:0; z-index:2000; background:rgba(18,20,26,.75); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:1.5rem; opacity:0; pointer-events:none; transition:opacity var(--t); }
+.modal-overlay.open { opacity:1; pointer-events:all; }
+.modal-panel { background:var(--white); border-radius:var(--rad-lg); width:100%; max-width:780px; max-height:88vh; overflow-y:auto; position:relative; transform:scale(.94) translateY(16px); transition:transform .3s var(--ease); scrollbar-width:thin; scrollbar-color:var(--border) transparent; }
+.modal-overlay.open .modal-panel { transform:scale(1) translateY(0); }
+.modal-close { position:sticky; top:1.25rem; float:right; margin:1.25rem 1.25rem 0 0; font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); padding:.38rem .75rem; border:1.5px solid var(--border); border-radius:6px; transition:all var(--t); z-index:10; background:var(--white); }
+.modal-close:hover { background:var(--ink); color:var(--white); border-color:var(--ink); }
+.modal-content { padding:0 2.25rem 3rem; }
+
+/* Modal internals */
+.mc-stripe { height:6px; border-radius:var(--rad-lg) var(--rad-lg) 0 0; }
+.mc-head { padding:2rem 2.25rem 1.5rem; border-bottom:2px solid var(--border); }
+.mc-eyebrow { font-size:.68rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.5rem; }
+.mc-title { font-size:2rem; font-weight:900; letter-spacing:-.03em; color:var(--ink); margin-bottom:.4rem; line-height:1.1; }
+.mc-q { font-size:.95rem; font-weight:500; color:var(--ink-3); margin-bottom:1.1rem; line-height:1.5; }
+.mc-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
+.mc-tag { font-size:.62rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.22rem .6rem; border-radius:4px; border:1.5px solid; }
+
+.mc-label { font-size:.65rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-4); display:flex; align-items:center; gap:.6rem; margin:1.75rem 0 .75rem; }
+.mc-label::after { content:''; flex:1; height:1px; background:var(--border); }
+.mc-text { font-size:.92rem; line-height:1.8; color:var(--ink-2); margin-bottom:1rem; font-weight:400; }
+.mc-table { width:100%; border-collapse:collapse; font-size:.85rem; margin-bottom:1.25rem; }
+.mc-table th { font-size:.65rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.6rem .85rem; text-align:left; border-bottom:2px solid var(--ink); background:var(--bg); color:var(--ink-2); }
+.mc-table td { padding:.7rem .85rem; border-bottom:1px solid var(--border); color:var(--ink-2); line-height:1.65; vertical-align:top; font-size:.85rem; }
+.mc-table tr:last-child td { border-bottom:none; }
+.mc-table td:first-child { font-weight:700; color:var(--ink); width:33%; }
+.mc-list { list-style:none; margin-bottom:1.25rem; }
+.mc-list li { font-size:.88rem; line-height:1.7; color:var(--ink-2); padding:.32rem 0 .32rem 1.2rem; position:relative; border-bottom:1px solid var(--bg-2); font-weight:400; }
+.mc-list li::before { content:'→'; position:absolute; left:0; color:var(--ink-4); font-size:.78rem; top:.45em; }
+.mc-pills { display:flex; flex-wrap:wrap; gap:.4rem; }
+.mc-pill { font-size:.7rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; padding:.28rem .72rem; background:var(--bg); border:1px solid var(--border); border-radius:5px; color:var(--ink-2); }
+
+/* ── BACK TOP ────────────────────────────────────────────── */
+.to-top { position:fixed; bottom:2rem; right:2rem; z-index:900; width:44px; height:44px; background:var(--ink); color:var(--white); font-size:1.1rem; font-weight:700; display:flex; align-items:center; justify-content:center; border-radius:50%; border:2px solid rgba(255,255,255,.15); opacity:0; transform:translateY(14px); transition:all var(--t); }
+.to-top.show { opacity:1; transform:translateY(0); }
+.to-top:hover { background:var(--blue); border-color:var(--blue); }
+
+/* ── KEYFRAMES ──────────────────────────────────────────── */
+@keyframes upIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width:1024px) {
+  .hero-inner { grid-template-columns:1fr; gap:3rem; padding:4rem 2rem 3rem; }
+  .hero-right { display:none; }
+}
+@media (max-width:768px) {
+  .nav-links { display:none; }
+  .burger { display:flex; }
+  .mob-menu { display:flex; }
+  .sec-inner { padding:0 1.5rem; }
+  .sec-heading { flex-direction:column; gap:1rem; }
+  .sec-badge { font-size:3rem; }
+  .model-grid { grid-template-columns:1fr; }
+  .ov-grid { grid-template-columns:1fr; }
+  .hero-inner { padding:3.5rem 1.5rem 3rem; }
+  .overview-inner { padding:0 1.5rem; }
+  .footer { padding:1.5rem; }
+  .hero-counts { gap:1.25rem; }
+}
+@media (max-width:480px) {
+  .nav-inner { padding:0 1.25rem; }
+  .hero-sections { flex-wrap:wrap; }
+}
+</style>
+</head>
+<body>
+
+  <div class="top-bar" id="topBar"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="nav-brand">
+        <span class="brand-box">10</span>
+        <span class="brand-label">Culture<br>Models</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#sec-understand" class="nav-link" data-s="sec-understand">Understand</a>
+        <a href="#sec-classify"   class="nav-link" data-s="sec-classify">Classify</a>
+        <a href="#sec-change"     class="nav-link" data-s="sec-change">Change</a>
+        <a href="#overview"       class="nav-link">Overview</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mob-menu" id="mobMenu">
+    <a href="#sec-understand" class="mob-link">01 — Understand Culture</a>
+    <a href="#sec-classify"   class="mob-link">02 — Classify Culture</a>
+    <a href="#sec-change"     class="mob-link">03 — Change Culture</a>
+    <a href="#overview"       class="mob-link">All 10 Models</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-tag">Organisational Leadership Series</div>
+        <h1 class="hero-title">
+          <span class="ht-top">10 Culture</span>
+          <span class="ht-bottom">Models</span>
+        </h1>
+        <p class="hero-sub">Every leader needs to understand the invisible forces that drive behaviour, shape decisions, and ultimately determine whether strategy succeeds or fails.</p>
+        <div class="hero-counts">
+          <div class="hcount"><strong>10</strong><span>Models</span></div>
+          <div class="hcount-div"></div>
+          <div class="hcount"><strong>3</strong><span>Phases</span></div>
+          <div class="hcount-div"></div>
+          <div class="hcount"><strong>50+</strong><span>Yrs Research</span></div>
+        </div>
+        <div class="hero-sections">
+          <a href="#sec-understand" class="hs-pill hs-blue">01 Understand</a>
+          <a href="#sec-classify"   class="hs-pill hs-amber">02 Classify</a>
+          <a href="#sec-change"     class="hs-pill hs-teal">03 Change</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-grid-cards" id="heroCards"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 1: UNDERSTAND -->
+  <section class="section" id="sec-understand" data-accent="blue">
+    <div class="sec-inner">
+      <div class="sec-heading">
+        <div class="sec-badge">01</div>
+        <div class="sec-head-text">
+          <h2 class="sec-title">Understand Culture</h2>
+          <p class="sec-desc">Culture is largely invisible — it lives in assumptions, habits, and unspoken rules. These three models reveal what culture actually is, how it is structured, and which dimensions vary most across organisations and nations.</p>
+        </div>
+      </div>
+      <div class="model-grid" id="grid-understand"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CLASSIFY -->
+  <section class="section" id="sec-classify" data-accent="amber">
+    <div class="sec-inner">
+      <div class="sec-heading">
+        <div class="sec-badge">02</div>
+        <div class="sec-head-text">
+          <h2 class="sec-title">Classify Culture</h2>
+          <p class="sec-desc">Once you can see culture, you need to be able to name it. These four typology models give leaders a shared language to diagnose where their organisation sits — and what that means for leadership, strategy, and performance.</p>
+        </div>
+      </div>
+      <div class="model-grid" id="grid-classify"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: CHANGE -->
+  <section class="section" id="sec-change" data-accent="teal">
+    <div class="sec-inner">
+      <div class="sec-heading">
+        <div class="sec-badge">03</div>
+        <div class="sec-head-text">
+          <h2 class="sec-title">Change Culture</h2>
+          <p class="sec-desc">Understanding and classifying culture is not enough — leaders must be able to change it. These three models provide the practical frameworks for navigating cultural transformation without destroying what works.</p>
+        </div>
+      </div>
+      <div class="model-grid" id="grid-change"></div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW TABLE -->
+  <section class="overview" id="overview">
+    <div class="overview-inner">
+      <div class="ov-head">
+        <p class="ov-label">All 10 at a glance</p>
+        <h2 class="ov-title">Complete Overview</h2>
+      </div>
+      <div class="ov-grid" id="ovGrid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-box">10</span>
+        <span class="footer-text">Organisational Culture Models</span>
+      </div>
+      <p class="footer-note">Click any model to explore the full breakdown.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-panel" id="modalPanel">
+      <button class="modal-close" id="modalClose">Close &times;</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">&#8593;</button>
+
+  <script>
+</body>
+</html>
+/* ============================================================
+   10 ORGANISATIONAL CULTURE MODELS  |  culture-app.js
+   ============================================================ */
+
+const ACCENTS = {
+  blue:  { main:'#1a4fd6', mid:'#2e63e8', lt:'#dce8ff', bg:'#f0f5ff', cls:'blue'  },
+  amber: { main:'#b85c00', mid:'#d06a00', lt:'#fde8cc', bg:'#fff8f0', cls:'amber' },
+  teal:  { main:'#006b5e', mid:'#008573', lt:'#ccf0ea', bg:'#f0faf8', cls:'teal'  },
+};
+
+const MODELS = [
+
+  // ── SECTION 1: UNDERSTAND ──────────────────────────────
+  {
+    id:1, section:'understand', accent:'blue', icon:'◈',
+    name:"Schein's Three Levels of Culture",
+    question:"What are the visible and invisible layers of culture in our organisation?",
+    summary:"Edgar Schein's foundational model reveals that culture operates at three distinct depths — from visible artefacts on the surface, through stated values in the middle, to invisible basic assumptions at the core. Most change efforts fail by addressing only the surface layers.",
+    tags:['Foundations','Diagnosis','Leadership'],
+    roles:['HR Directors','OD Consultants','CEOs','Change Leaders'],
+    overview:"Edgar Schein, professor at MIT Sloan School of Management, developed this model over decades of research and consulting work, publishing the definitive account in 'Organisational Culture and Leadership' (1985, with many subsequent editions). It remains the most widely cited academic model of organisational culture and is the essential starting point for any serious culture work. Schein argued that most people misunderstand culture by focusing only on its most visible manifestations.",
+    problem:"Leaders often try to change culture by changing visible behaviours — dress codes, office layouts, mission statements. These fail because they don't touch the deeper assumptions that actually drive behaviour. Schein's model explains why culture change is hard and where the real leverage is.",
+    components:[
+      ["Level 1: Artefacts","The visible, tangible elements of culture. Office layout, dress code, rituals, ceremonies, stories, language, published values. Easy to observe but hard to interpret correctly without understanding the deeper levels."],
+      ["Level 2: Espoused Values","The stated beliefs, norms, and values — what the organisation says it believes. Strategy documents, mission statements, codes of conduct. These may or may not reflect actual behaviour."],
+      ["Level 3: Basic Assumptions","The unconscious, taken-for-granted beliefs that members of the culture no longer question. These are the true drivers of behaviour. They are the hardest to surface and the hardest to change."],
+      ["The Alignment Test","Powerful diagnostic: when Artefacts and Espoused Values are inconsistent (people say X but do Y), it reveals the Basic Assumptions that are actually driving the organisation."],
+    ],
+    process:[
+      "Start with Artefacts: observe and list all visible cultural elements without judging them",
+      "Identify Espoused Values: review published values, strategy documents, and interview leaders",
+      "Surface Basic Assumptions: run workshops asking 'why do we really do this?' repeatedly until you reach bedrock beliefs",
+      "Look for misalignments between levels — these are the most revealing cultural diagnostics",
+      "Design change interventions that target Basic Assumptions, not just surface Artefacts",
+    ],
+    when:["Diagnosing why culture change efforts have failed","Before a major merger or acquisition","Leadership development programmes on culture","Onboarding new senior leaders","Investigating why stated values and actual behaviours diverge"],
+    pitfalls:["Assuming that changing Artefacts will change culture — it rarely does on its own","Skipping the Basic Assumptions level because it is hard to surface","Treating the model as a one-time diagnostic rather than an ongoing lens","Not involving people at all levels — frontline staff often have clearer sight of Basic Assumptions than leaders"],
+    software:["Miro (culture mapping workshops)","Mentimeter (anonymous assumption surfacing)","Qualtrics (culture surveys)","Notion (culture documentation)"],
+  },
+
+  {
+    id:2, section:'understand', accent:'blue', icon:'◎',
+    name:"The Cultural Web",
+    question:"What six elements are holding our current culture in place?",
+    summary:"Gerry Johnson and Kevan Scholes's model identifies the six interconnected elements that together define an organisation's cultural paradigm — stories, rituals, symbols, power structures, control systems, and organisational structure — showing exactly what must shift for culture to change.",
+    tags:['Diagnosis','Change Planning','Strategy'],
+    roles:['Strategy Teams','HR Directors','Consultants','Leadership Teams'],
+    overview:"The Cultural Web was developed by Gerry Johnson and Kevan Scholes and first published in their seminal strategy textbook 'Exploring Corporate Strategy' (1992). It emerged from research into why strategic change so often fails despite clear logical rationale. Johnson and Scholes found that six deeply embedded cultural elements form a web that holds the current 'paradigm' (the accepted way of doing things) firmly in place — and any serious change effort must address all six, not just one or two.",
+    problem:"Most change programmes focus on org structure and communications while leaving the other five cultural elements untouched. The Cultural Web explains why change doesn't stick — the stories, rituals, and power structures continue to reinforce the old paradigm even as the new strategy is being communicated.",
+    components:[
+      ["Stories","The narratives that members of the organisation tell each other and outsiders. They encode what is valued and what is punished. Who are the heroes? What failures are remembered?"],
+      ["Rituals and Routines","The daily behaviours and actions that signal what is really important. How do meetings run? How is performance reviewed? What gets celebrated?"],
+      ["Symbols","The visual and physical representations of the organisation. Office layout, car parking, dress code, language, titles. Who gets the corner office?"],
+      ["Power Structures","Who really has power and influence? Formal authority rarely tells the full story. Identify the informal power brokers."],
+      ["Control Systems","What gets measured and rewarded? Financial controls, quality systems, performance management. 'What gets measured gets done.'"],
+      ["Organisational Structure","Both formal (org chart) and informal (how decisions actually get made). Hierarchical? Flat? Siloed?"],
+      ["The Paradigm","The core cultural assumptions at the centre of the web — the summary of 'the way things are done around here'. All six elements reinforce it."],
+    ],
+    process:[
+      "Map the current Cultural Web: for each of the six elements, gather data through interviews, observation, and review of documents",
+      "Identify what the current Paradigm is — what story does the web tell?",
+      "Map the desired Cultural Web: what needs to be true in each element to support the new strategy?",
+      "Identify the gaps between current and desired state in each element",
+      "Design specific interventions for each element — all six must shift together",
+    ],
+    when:["Strategic change planning","Post-merger culture integration","When a new CEO is diagnosing the organisation","Culture transformation programme design","When strategy keeps failing to stick despite good planning"],
+    pitfalls:["Addressing only one or two elements and expecting full culture change","Mapping the Cultural Web in a leadership workshop only — involve people across all levels","Treating it as a one-time exercise — culture shifts slowly and monitoring all six elements is an ongoing task","Underestimating the power of Stories — they are often the most powerful and most neglected element"],
+    software:["Miro (web mapping)","Mural","FigJam","Notion","PowerPoint (stakeholder presentations)"],
+  },
+
+  {
+    id:3, section:'understand', accent:'blue', icon:'◇',
+    name:"Hofstede's Cultural Dimensions",
+    question:"How do national and organisational cultures differ across six measurable dimensions?",
+    summary:"Geert Hofstede's landmark research across 70+ countries identified six dimensions on which cultures reliably vary — from Power Distance to Uncertainty Avoidance to Long-Term Orientation — giving leaders a data-driven tool for navigating cross-cultural differences.",
+    tags:['Cross-Cultural','Global Teams','Research-Based'],
+    roles:['Global HR Leaders','International Managers','Talent Teams','M&A Teams'],
+    overview:"Geert Hofstede conducted one of the largest cross-cultural studies ever undertaken, analysing survey data from IBM employees in over 70 countries during the 1960s and 1970s. Published in 'Culture's Consequences' (1980), his work identified four initial dimensions (later expanded to six) that reliably distinguish national cultures. The model has been validated, extended, and replicated dozens of times and is the most cited framework in cross-cultural management research.",
+    problem:"When global teams fail, when international expansions underperform, when cross-cultural mergers destroy value, the root cause is usually cultural misunderstanding. Hofstede's dimensions make cultural differences visible and measurable — replacing vague 'cultural fit' concerns with specific, actionable insights.",
+    components:[
+      ["Power Distance Index (PDI)","The degree to which less powerful members of society accept that power is distributed unequally. High PDI: hierarchical, top-down. Low PDI: flat, consultative. Impacts: how feedback is given, how decisions are made, how leaders should communicate."],
+      ["Individualism vs Collectivism (IDV)","High individualism: people prioritise personal goals and identity. High collectivism: group identity and loyalty are primary. Impacts: incentive design, team structures, communication styles."],
+      ["Masculinity vs Femininity (MAS)","High masculinity: competition, achievement, and success are dominant values. High femininity: cooperation, quality of life, and care are dominant. Impacts: leadership style, work-life balance expectations, conflict resolution."],
+      ["Uncertainty Avoidance Index (UAI)","The degree to which people feel uncomfortable with ambiguity and uncertainty. High UAI: rules, structure, and certainty are valued. Low UAI: flexibility and risk-taking are accepted. Impacts: process design, risk appetite, change management."],
+      ["Long-Term vs Short-Term Orientation (LTO)","Long-term: focus on future rewards, perseverance, thrift. Short-term: focus on present, tradition, social norms. Impacts: investment horizon, strategic planning cycles."],
+      ["Indulgence vs Restraint (IVR)","Indulgence: free gratification of basic desires is accepted. Restraint: strict social norms suppress gratification. Impacts: work culture, employee wellbeing, social norms."],
+    ],
+    process:[
+      "Use Hofstede Insights' free country comparison tool to assess the dimensions of the cultures your organisation spans",
+      "Identify the dimensions with the largest gaps between the cultures you are bridging",
+      "For each significant gap, explore the practical implications for leadership, communication, and process",
+      "Design specific adaptations to management practices for each cultural context",
+      "Train global managers on the dimensions most relevant to their cross-cultural relationships",
+    ],
+    when:["Planning a market entry into an unfamiliar cultural context","Designing global team structures and processes","M&A due diligence on cultural compatibility","Leadership development for global managers","Investigating cross-cultural team performance issues"],
+    pitfalls:["Treating Hofstede's scores as stereotypes about individuals — they describe population-level tendencies, not individual traits","Using only the original four dimensions and ignoring the later additions","Not accounting for generational and industry-level variation within national cultures","Applying national culture data directly to a specific organisation without testing it"],
+    software:["Hofstede Insights Country Comparison Tool (free)","Globesmart (Aperian)","Culture Wizard","Tableau (custom culture dashboards)"],
+  },
+
+  // ── SECTION 2: CLASSIFY ────────────────────────────────
+  {
+    id:4, section:'classify', accent:'amber', icon:'▦',
+    name:"Competing Values Framework",
+    question:"What is our dominant cultural orientation — and is it aligned with our strategy?",
+    summary:"Robert Quinn and John Rohrbaugh's research-validated framework that maps every organisational culture across two axes — internal vs external focus and flexibility vs stability — creating four distinct culture types: Collaborate, Create, Control, and Compete.",
+    tags:['Culture Types','Strategy Alignment','Assessment'],
+    roles:['CEOs','HR Directors','Strategy Teams','OD Practitioners'],
+    overview:"The Competing Values Framework (CVF) was developed by Robert Quinn and John Rohrbaugh at the University of Michigan through research into organisational effectiveness criteria. Published in 1983, it has become one of the most widely researched and applied frameworks in organisational culture. Its strength is that it is empirically derived (from research, not theory) and provides both a diagnostic tool (the OCAI assessment) and a strategic alignment tool — connecting culture type directly to effectiveness under different strategic conditions.",
+    problem:"Most organisations don't have a clear understanding of what type of culture they actually have, as opposed to the culture they aspire to. The CVF provides an evidence-based diagnostic that creates a shared, honest baseline — replacing generic 'we want a great culture' with a specific, measurable cultural profile.",
+    components:[
+      ["Collaborate (Clan Culture)","Focus: internal + flexible. Values: teamwork, participation, employee development, consensus. Leader type: mentor, facilitator. Effectiveness through: cohesion and morale. Risk: too internally focused, slow to respond to market."],
+      ["Create (Adhocracy Culture)","Focus: external + flexible. Values: innovation, entrepreneurship, agility, risk-taking. Leader type: innovator, entrepreneur. Effectiveness through: breakthrough products and services. Risk: lack of discipline and follow-through."],
+      ["Control (Hierarchy Culture)","Focus: internal + stability. Values: process, efficiency, consistency, predictability. Leader type: coordinator, monitor. Effectiveness through: reliable, low-cost delivery. Risk: too rigid, slow to adapt."],
+      ["Compete (Market Culture)","Focus: external + stability. Values: results, customer focus, competition, achievement. Leader type: hard driver, competitor. Effectiveness through: market share and revenue. Risk: burns out people, short-term focus."],
+      ["Balance","All organisations have elements of all four. The CVF shows the dominant profile. Effective organisations can flex between types as context demands."],
+    ],
+    process:[
+      "Run the OCAI (Organisational Culture Assessment Instrument) survey across the organisation",
+      "Plot the current culture profile on the CVF quadrant",
+      "Run the same survey asking about the preferred future culture",
+      "Identify the gap between current and preferred profile",
+      "Assess alignment: does the current or preferred culture support the business strategy?",
+      "Design change interventions to shift the balance toward the preferred quadrant",
+    ],
+    when:["Culture assessment before a strategic shift","Post-merger culture integration planning","Diagnosing performance issues rooted in cultural misalignment","Leadership team effectiveness workshops","Annual people strategy planning"],
+    pitfalls:["Treating one culture type as 'best' — all four are effective in the right strategic context","Conducting only a leadership survey and assuming it represents the whole organisation","Not connecting the cultural assessment to strategic imperatives","Trying to shift all four dimensions simultaneously — prioritise one or two shifts"],
+    software:["OCAI Online (official CVF assessment tool)","Qualtrics","Culture Amp","Glint","Notion (results synthesis)"],
+  },
+
+  {
+    id:5, section:'classify', accent:'amber', icon:'◯',
+    name:"Handy's Four Culture Types",
+    question:"Is our culture shaped by power, rules, tasks, or individuals?",
+    summary:"Charles Handy's accessible four-type model — Power Culture, Role Culture, Task Culture, and Person Culture — maps organisational cultures using Greek god metaphors, making culture conversations accessible to non-specialists and giving leaders a clear language for diagnosis and change.",
+    tags:['Culture Typology','Leadership','Diagnosis'],
+    roles:['Line Managers','HR Business Partners','Leadership Teams','MBA Students'],
+    overview:"Charles Handy introduced his four culture types in 'Gods of Management' (1978) and later 'Understanding Organisations' (1976). Handy used Greek gods as metaphors for each type — Zeus (Power), Apollo (Role), Athena (Task), and Dionysus (Person) — making the framework unusually accessible and memorable. Although less data-driven than Quinn's CVF, Handy's framework is widely used in leadership development and management education because its metaphors make culture tangible for non-specialists.",
+    problem:"Culture conversations are often abstract and hard to engage with. Handy's model gives leaders a concrete, memorable vocabulary to describe and discuss the culture they observe — making culture a practical management conversation rather than an HR abstraction.",
+    components:[
+      ["Power Culture (Zeus — The Spider's Web)","Power radiates from a central figure or small elite. Decisions are fast. Rules are secondary to relationships with the centre. Strength: speed and decisive action. Weakness: dependent on the quality of the central leader; can be exploitative."],
+      ["Role Culture (Apollo — The Temple)","Power comes from position and formal authority. Rules, procedures, and job descriptions define everything. Strength: consistency, reliability, scalability. Weakness: slow to adapt, stifles initiative, frustrating for talented individuals."],
+      ["Task Culture (Athena — The Net)","Power comes from expertise and what you know, not who you are. Teams form around problems and disband when solved. Strength: collaborative, flexible, good for innovation. Weakness: hard to control costs, inefficient at scale."],
+      ["Person Culture (Dionysus — The Cluster)","The individual is the point. The organisation exists to serve the people within it. Common in professional partnerships (law firms, consultancies). Strength: retains top talent, high individual motivation. Weakness: very difficult to manage, low organisational loyalty."],
+    ],
+    process:[
+      "Discuss each culture type with the leadership team — which metaphor best describes the current culture?",
+      "Gather input from multiple levels of the organisation to test the leadership team's perception",
+      "Identify whether the current culture type suits the organisation's current strategic and operational needs",
+      "Explore whether different parts of the organisation have different culture types (common in large organisations)",
+      "Design leadership and management interventions appropriate to the desired culture type",
+    ],
+    when:["Leadership development and management training programmes","Diagnosing why a particular management approach isn't working","Helping new managers understand the environment they are operating in","Team effectiveness workshops","Post-reorganisation culture analysis"],
+    pitfalls:["Oversimplifying — most organisations blend culture types across different functions and levels","Using Handy's framework as the sole diagnostic without quantitative data","Assuming the 'right' culture type is Task Culture — all four are appropriate in different contexts","Not acknowledging that culture types often need to shift as an organisation scales"],
+    software:["Miro (group classification workshops)","Mentimeter (voting on culture types)","Any whiteboard or flipchart","Notion","Survey tools for gathering broad input"],
+  },
+
+  {
+    id:6, section:'classify', accent:'amber', icon:'◆',
+    name:"Deal and Kennedy's Cultural Model",
+    question:"How do risk and speed of feedback combine to create our cultural character?",
+    summary:"Terrence Deal and Allan Kennedy's 1982 framework identifies four culture types based on two axes — the degree of risk in decisions and the speed of feedback on results — producing a model that links cultural type directly to industry dynamics and market conditions.",
+    tags:['Culture Typology','Industry Context','Risk'],
+    roles:['Business Leaders','Strategy Teams','HR Directors','Consultants'],
+    overview:"Terrence Deal and Allan Kennedy published 'Corporate Cultures: The Rites and Rituals of Corporate Life' in 1982, one of the first popular business books to argue that culture was a manageable strategic asset. Their framework was developed from research into successful companies across multiple industries and produced one of the first empirically grounded culture typologies. The model is valuable because it explicitly connects culture to the external business environment — particularly the level of risk and speed of market feedback.",
+    problem:"Many culture frameworks ignore the external environment, implying a 'best' culture exists. Deal and Kennedy's model shows that different industries and markets naturally produce and require different cultures — helping leaders understand whether their culture is fit for their specific competitive environment.",
+    components:[
+      ["Tough-Guy, Macho Culture (High Risk, Fast Feedback)","Common in: financial trading, entertainment, sport, advertising, construction. Values: individualism, competition, quick results. Heroes are big risk-takers who succeed or fail visibly and fast. Risk: short-term focus, high burnout, poor teamwork."],
+      ["Work Hard / Play Hard Culture (Low Risk, Fast Feedback)","Common in: sales organisations, consumer goods, retail, restaurant chains. Values: volume of activity, persistence, customer focus, team celebration. Risk: quantity over quality, superficiality."],
+      ["Bet the Company Culture (High Risk, Slow Feedback)","Common in: aerospace, pharmaceutical R&D, oil exploration, capital projects. Values: long-term thinking, thoroughness, technical expertise. Major decisions take years to validate. Risk: slow to adapt, can miss market shifts."],
+      ["Process Culture (Low Risk, Slow Feedback)","Common in: government, utilities, heavily regulated industries, large bureaucracies. Values: technical perfection, consistency, protection from error. Risk: loses sight of outcomes, becomes obsessed with process for its own sake."],
+    ],
+    process:[
+      "Assess your industry context: how high-risk are your major decisions? How quickly does the market give feedback?",
+      "Identify your current culture type from the four quadrants",
+      "Assess whether the culture type is appropriate for your strategic context",
+      "Identify specific cultural artefacts (rituals, heroes, stories) that reinforce the current type",
+      "Design interventions to reinforce beneficial aspects and mitigate the specific risks of your type",
+    ],
+    when:["Industry-level culture benchmarking","Understanding why a culture feels mismatched to business needs","M&A culture due diligence across industries","Strategy reviews where cultural enablers are being assessed","Leadership development in context of industry dynamics"],
+    pitfalls:["Treating the four types as fixed and immutable — industries evolve and culture must evolve with them","Using this framework alone without supplementary diagnostic tools","Confusing industry-level tendencies with the actual culture of a specific organisation","Neglecting that most large organisations span multiple culture types across divisions"],
+    software:["Miro","PowerPoint","Culture Amp (supplementary survey data)","Notion","Any facilitation tool for workshop discussion"],
+  },
+
+  {
+    id:7, section:'classify', accent:'amber', icon:'★',
+    name:"Denison Organisational Culture Model",
+    question:"How do our culture traits link directly to measurable business performance?",
+    summary:"Daniel Denison's research-backed model identifies four culture traits — Mission, Adaptability, Involvement, and Consistency — and demonstrates through 25 years of data that each trait directly predicts specific business outcomes including profitability, growth, and employee engagement.",
+    tags:['Performance Link','Research-Based','Measurement'],
+    roles:['CEOs','HR Directors','Strategy Teams','Finance Leaders'],
+    overview:"Daniel Denison developed his model at the University of Michigan over decades of research, first publishing it in 'Corporate Culture and Organisational Effectiveness' (1990). What distinguishes the Denison model from other culture frameworks is its explicit, data-validated link between specific culture traits and measurable business outcomes. Denison's research database, built from assessments of thousands of organisations, shows precisely which culture traits predict sales growth, market share, quality, employee satisfaction, and overall return on investment.",
+    problem:"Culture sceptics in the C-suite often ask: 'How does culture relate to the numbers?' Denison's model provides a direct answer — specific culture traits have statistically demonstrable relationships to specific business outcomes, making the ROI of culture investment concrete and defensible.",
+    components:[
+      ["Mission (Stability + External Focus)","Clear sense of purpose and long-term direction. Sub-traits: Strategic Direction, Goals and Objectives, Vision. Links to: profitability, return on assets, investment returns."],
+      ["Consistency (Stability + Internal Focus)","Shared values and strong organisational identity creating coordination and integration. Sub-traits: Core Values, Agreement, Coordination and Integration. Links to: quality, cycle time reduction, error reduction."],
+      ["Involvement (Flexibility + Internal Focus)","Building human capability, ownership, and commitment at all levels. Sub-traits: Empowerment, Team Orientation, Capability Development. Links to: employee satisfaction, engagement, innovation."],
+      ["Adaptability (Flexibility + External Focus)","Translating customer and market demands into action. Sub-traits: Creating Change, Customer Focus, Organisational Learning. Links to: sales growth, market share, new product development."],
+    ],
+    process:[
+      "Run the Denison Organisational Culture Survey across the organisation",
+      "Review the 'circumplex' — the visual output showing scores on all four traits",
+      "Identify the weakest traits relative to your strategic priorities",
+      "Use Denison's benchmark database to compare your scores to high-performing organisations in your industry",
+      "Design targeted culture interventions for the weakest traits",
+      "Re-survey at 12–18 months to measure change",
+    ],
+    when:["Making the business case for culture investment to the board","Linking culture improvement to specific financial and operational KPIs","Benchmarking organisational culture against industry peers","Annual people strategy and culture health reviews","Post-merger integration culture alignment"],
+    pitfalls:["Running the survey without leadership commitment to act on the results","Treating the four traits as equally important regardless of strategic context — prioritise based on strategy","Not benchmarking against the Denison database — scores are only meaningful relative to norms","Expecting quick results — culture shifts take 2–4 years to show up in financial performance data"],
+    software:["Denison Consulting (official survey and benchmarking tool)","Culture Amp","Qualtrics","Glint","Power BI (results dashboards)"],
+  },
+
+  // ── SECTION 3: CHANGE ──────────────────────────────────
+  {
+    id:8, section:'change', accent:'teal', icon:'↺',
+    name:"Lewin's Change Model",
+    question:"How do we move our organisation from its current culture to a new one without losing stability?",
+    summary:"Kurt Lewin's elegant three-stage model — Unfreeze, Change, Refreeze — provides the foundational logic for all planned culture change: first disrupt the status quo, then introduce new behaviours and values, then lock the new culture in place before the old patterns reassert themselves.",
+    tags:['Change Management','Culture Shift','Foundations'],
+    roles:['Change Leaders','CEOs','HR Directors','Transformation Teams'],
+    overview:"Kurt Lewin, a pioneering social psychologist, developed his change model in the 1940s as part of broader research into group dynamics and social change. Published posthumously in 'Field Theory in Social Science' (1951), the model is deliberately simple — Lewin believed that complex social phenomena could be understood through elegant, minimal frameworks. Despite its age, the three-stage model remains one of the most practically applied change management frameworks because its core logic — you must first unsettle the existing equilibrium before change can take root — is universally valid.",
+    problem:"Most culture change efforts fail not because the new culture was wrong but because the old culture was never properly unfrozen. Leaders announce the new direction and begin training on new behaviours while the fundamental assumptions, incentive systems, and power structures of the old culture remain fully intact. Lewin's model explains why this fails and what to do instead.",
+    components:[
+      ["Stage 1: Unfreeze","Create the motivation and readiness to change. Disrupt the current equilibrium. Methods: communicate a compelling case for change, create psychological safety to admit problems, surface the costs of the status quo, challenge current assumptions. This stage is most often skipped or rushed — and it is the most important."],
+      ["Stage 2: Change (Transition)","The actual movement from old behaviours and values to new ones. Provide new knowledge, new models, new role models. Support experimentation with new behaviours. Manage the anxiety and uncertainty of the transition state. This is the longest and most difficult stage."],
+      ["Stage 3: Refreeze","Lock the new culture in place before old patterns reassert themselves. Methods: update reward and recognition systems to reinforce new behaviours, embed new culture in structures and processes, celebrate visible successes, tell new stories. Without Refreezing, the organisation will drift back."],
+      ["Driving and Restraining Forces","Lewin's Force Field Analysis: identify the forces pushing for change (driving forces) and those resisting it (restraining forces). Successful change requires either strengthening driving forces or weakening restraining forces — or ideally both."],
+    ],
+    process:[
+      "Conduct a Force Field Analysis: what is driving the need for change? What is resisting it?",
+      "Design the Unfreeze phase: what needs to happen to make the organisation ready and willing to change?",
+      "Design the Change phase: what specific behaviours, beliefs, and systems need to shift? What support will people need?",
+      "Design the Refreeze phase: which structures, processes, incentives, and stories will lock the new culture in place?",
+      "Sequence interventions across all three stages and assign ownership",
+    ],
+    when:["Planning a major culture transformation programme","Post-merger integration planning","Responding to an organisational crisis that requires cultural reset","Designing leadership development that creates lasting behaviour change","Any planned change programme where sustainability of change is a concern"],
+    pitfalls:["Skipping Unfreeze — the most common and most costly mistake","Refreezing prematurely before the new behaviours are genuinely embedded","Not conducting Force Field Analysis before beginning the change","Underestimating how long the Change (transition) stage takes — typically 18–36 months for deep culture change","Treating Lewin as a simple checklist rather than a dynamic framework requiring ongoing adjustment"],
+    software:["Miro (Force Field Analysis templates)","Change management platforms: Prosci/ADKAR tools","Microsoft Planner / Asana (change programme tracking)","Notion (change documentation)","Viva Insights (Microsoft) for monitoring behaviour change"],
+  },
+
+  {
+    id:9, section:'change', accent:'teal', icon:'◉',
+    name:"Kotter's 8-Step Change Model",
+    question:"What eight steps must we follow to create lasting, large-scale culture change?",
+    summary:"John Kotter's research-based, sequenced framework for large-scale change — from creating urgency to anchoring change in culture — built from analysis of over 100 major change efforts, revealing the eight specific failure points that cause most change initiatives to collapse.",
+    tags:['Change Leadership','Large-Scale Change','Sequencing'],
+    roles:['CEOs','Senior Leadership','Change Programme Directors','HR Leaders'],
+    overview:"John Kotter, Professor at Harvard Business School, developed his 8-step model from research into over 100 organisations attempting major transformations. Published in the Harvard Business Review in 1995 and expanded in the book 'Leading Change' (1996), the model identified the eight most common mistakes that cause change to fail — and sequenced eight steps to avoid them. It became one of the most widely implemented change management frameworks in the world and was updated in 'Accelerate' (2014) to address the need for organisations to change faster.",
+    problem:"Large-scale culture change fails in predictable, avoidable ways. Kotter's research identified the specific sequences and conditions that most organisations get wrong. The 8-step model is not a theory — it is an empirically derived sequence of the critical success factors for major organisational change.",
+    components:[
+      ["Step 1: Create Urgency","Establish a compelling case that change is necessary now. Without genuine urgency felt by a critical mass of leaders and employees, change stalls. The urgency must be real — manufactured urgency is quickly seen through."],
+      ["Step 2: Build a Guiding Coalition","Assemble a powerful, cross-functional group committed to leading the change. This is not the same as the existing leadership team. Requires people with authority, expertise, credibility, and leadership capacity."],
+      ["Step 3: Form a Strategic Vision","Create a clear, compelling vision of the future state. Without a vivid, credible vision, change efforts dissolve into confusing and incompatible individual initiatives."],
+      ["Step 4: Enlist a Volunteer Army","Communicate the vision to as many people as possible. Address concerns honestly. Enable people to act on the vision by providing context and removing ambiguity."],
+      ["Step 5: Enable Action by Removing Barriers","Identify and remove obstacles: structures, systems, skills gaps, and managers who undermine the change. Empower people to act."],
+      ["Step 6: Generate Short-Term Wins","Plan for and create visible, unambiguous wins within the first 12–18 months. These prove the change is working and silence the sceptics."],
+      ["Step 7: Sustain Acceleration","Consolidate gains and produce more change. Use increasing credibility to tackle bigger problems. Keep the urgency high to prevent complacency."],
+      ["Step 8: Institute Change","Anchor new approaches in the culture. Show how new behaviours and attitudes have improved performance. Articulate the connections between new behaviours and success until they replace the old norms."],
+    ],
+    process:[
+      "Assess readiness: do you have genuine urgency and a committed coalition before proceeding?",
+      "Do not skip steps or rush through them — Kotter's research shows that skipping steps creates problems that require going back anyway",
+      "Assign clear ownership for each step",
+      "Plan for short-term wins from Day 1 — identify specific visible proof points that will be visible within 6–12 months",
+      "Build a communication strategy that runs throughout all 8 steps",
+    ],
+    when:["Major strategic transformation programmes","Post-merger integration driving cultural alignment","Responding to an existential threat requiring rapid cultural shift","Digital transformation where cultural change is a prerequisite","Any change programme lasting 18 months or more"],
+    pitfalls:["Skipping Step 1 (urgency) and Step 2 (coalition) — these are the most commonly skipped and most critical","Treating it as a linear checklist — later steps often need revisiting as earlier ones evolve","Declaring victory too early (between Steps 6 and 7) — the most common point of failure","Underestimating the importance of Step 8 — without anchoring, all gains unravel within 3–5 years"],
+    software:["Microsoft Project / Monday.com (programme tracking)","Prosci change management tools","Slack / Microsoft Teams (coalition communication)","Culture Amp (culture measurement at each stage)","Tableau / Power BI (short-term wins dashboards)"],
+  },
+
+  {
+    id:10, section:'change', accent:'teal', icon:'⬡',
+    name:"Spiral Dynamics",
+    question:"Through what developmental stages does an organisation's value system evolve?",
+    summary:"Clare Graves's research, developed by Don Beck and Chris Cowan into Spiral Dynamics, maps how individual and collective value systems evolve through predictable developmental stages — offering leaders a framework for understanding why people at different 'levels' respond so differently to the same cultural change initiative.",
+    tags:['Values Evolution','Developmental','Leadership'],
+    roles:['Executive Leaders','OD Practitioners','Culture Consultants','Leadership Coaches'],
+    overview:"Spiral Dynamics is based on the research of Professor Clare Graves, who from the 1950s to the 1970s studied how human values and world views evolve in response to changing life conditions. Don Beck and Chris Cowan synthesised Graves's work into the Spiral Dynamics model, published in 1996. It has been applied to organisational culture by leaders including Nelson Mandela's post-apartheid South Africa transition. Ken Wilber later integrated it into Integral Theory. While more complex than most culture frameworks, it is uniquely powerful for understanding why culture change meets such varied and seemingly irrational resistance.",
+    problem:"Leaders often assume everyone experiences a culture change in the same way. Spiral Dynamics reveals that people operating from different value systems (or 'vmemes') are literally perceiving the organisation and its change through different psychological lenses — which is why the same communication lands completely differently with different people.",
+    components:[
+      ["Beige (Survival)","Basic survival drives. Rare in modern organisations except in extreme crisis conditions."],
+      ["Purple (Tribal/Safety)","Tribal belonging, tradition, loyalty to the group. Common in family businesses and communities. Change is threatening to the tribe's safety."],
+      ["Red (Power/Action)","Power, conquest, immediate gratification, heroism. Common in start-ups and aggressive sales cultures. Responds to strength and decisiveness."],
+      ["Blue (Order/Purpose)","Rules, structure, right and wrong, discipline, duty. Common in government, military, traditional corporations. Change must appeal to duty and correctness."],
+      ["Orange (Achievement)","Success, results, optimisation, science, meritocracy. Dominant in most modern businesses. Responds to evidence, incentives, and rational argument."],
+      ["Green (Community)","Belonging, consensus, human development, sustainability, equality. Growing in progressive organisations. Change must be participative and values-driven."],
+      ["Yellow (Systemic/Flex)","Systems thinking, integration of multiple perspectives, functional flexibility. Rare but growing in complexity-aware organisations."],
+      ["Turquoise (Holistic)","Holistic, global consciousness. Very rare. Represents the integration of all previous systems."],
+    ],
+    process:[
+      "Assess the dominant value systems operating across different levels and functions of the organisation",
+      "Map the cultural change initiative: which vmeme is it designed for? Does it speak to the vmemes actually present?",
+      "Design multiple communication strategies for the same change, tailored to the dominant vmeme of each audience",
+      "Identify whether the change requires a vmeme transition (e.g. from Blue to Orange) — these are fundamentally harder and slower than same-vmeme improvements",
+      "Use Spiral Dynamics to coach leaders on adapting their style to different value systems",
+    ],
+    when:["Diagnosing why culture change communications are failing with specific groups","Designing change communications for a highly diverse organisation","Executive coaching on adaptive leadership style","Post-merger integration where two very different value systems are colliding","Long-term organisational development strategy"],
+    pitfalls:["Using Spiral Dynamics to label or judge people rather than understand them","Assuming higher stages are 'better' — each stage is the right adaptive response to specific life conditions","Applying the model without trained facilitation — it is complex and easily misapplied","Treating vmemes as fixed — people and organisations operate across multiple stages simultaneously"],
+    software:["No dedicated software — primarily used in facilitated workshops","Miro (spiral mapping)","Integral Life Practice tools","Notion","Executive coaching platforms"],
+  },
+];
+
+// ── HELPERS ─────────────────────────────────────────────
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+
+// ── PROGRESS BAR ────────────────────────────────────────
+function initProgress() {
+  const bar = $('#topBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    bar.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, { passive: true });
+}
+
+// ── NAV ──────────────────────────────────────────────────
+function initNav() {
+  const nav     = $('#nav');
+  const toTop   = $('#toTop');
+  const burger  = $('#burger');
+  const mob     = $('#mobMenu');
+  const links   = $$('.nav-link[data-s]');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    toTop.classList.toggle('show', y > 700);
+
+    // Nav accent colour by section
+    const classify = $('#sec-classify');
+    const change   = $('#sec-change');
+    nav.classList.toggle('at-classify', classify && y >= classify.offsetTop - 80);
+    nav.classList.toggle('at-change',   change   && y >= change.offsetTop   - 80);
+
+    // Active link
+    let cur = '';
+    $$('.section[id], #overview').forEach(s => {
+      if (s.offsetTop - 100 <= y) cur = s.id;
+    });
+    links.forEach(l => l.classList.toggle('active', l.dataset.s === cur));
+  }, { passive: true });
+
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mob.classList.toggle('open');
+  });
+  $$('.mob-link').forEach(l => l.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mob.classList.remove('open');
+  }));
+}
+
+// ── HERO CARDS ───────────────────────────────────────────
+function buildHeroCards() {
+  const grid = $('#heroCards');
+  if (!grid) return;
+  const picks = [1, 4, 8, 9, 3, 7];
+  picks.forEach(id => {
+    const m = MODELS.find(x => x.id === id);
+    if (!m) return;
+    const a = ACCENTS[m.accent];
+    const card = document.createElement('div');
+    card.className = 'hgc';
+    card.innerHTML = `<div class="hgc-num" style="color:${a.main}">Model 0${m.id}</div><div class="hgc-name">${m.name}</div>`;
+    card.addEventListener('click', () => openModal(m.id));
+    grid.appendChild(card);
+  });
+}
+
+// ── MODEL CARDS ──────────────────────────────────────────
+function buildCards() {
+  const map = { understand:'grid-understand', classify:'grid-classify', change:'grid-change' };
+  MODELS.forEach((m, i) => {
+    const grid = $('#' + map[m.section]);
+    if (!grid) return;
+    const a = ACCENTS[m.accent];
+    const section = grid.closest('.section');
+
+    const card = document.createElement('div');
+    card.className = 'model-card';
+    card.style.transition = `opacity .5s ${i % 4 * 80}ms, transform .5s ${i % 4 * 80}ms, box-shadow .25s, border-color .25s`;
+
+    card.innerHTML = `
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-num">Model 0${m.id}</span>
+          <span class="card-icon">${m.icon}</span>
+        </div>
+        <div class="card-name">${m.name}</div>
+        <div class="card-question">${m.question}</div>
+        <p class="card-summary">${m.summary}</p>
+        <div class="card-tags">${m.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
+        <div class="card-footer">
+          <span class="card-roles">${m.roles.slice(0,2).join(' · ')}</span>
+          <button class="card-btn" data-id="${m.id}">Full Model</button>
+        </div>
+      </div>
+    `;
+    card.addEventListener('click', () => openModal(m.id));
+    grid.appendChild(card);
+  });
+}
+
+// ── INTERSECTION OBSERVER ────────────────────────────────
+function initObserver() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  $$('.model-card').forEach(c => obs.observe(c));
+}
+
+// ── OVERVIEW GRID ────────────────────────────────────────
+function buildOverview() {
+  const grid = $('#ovGrid');
+  if (!grid) return;
+  const colors = { understand:ACCENTS.blue.main, classify:ACCENTS.amber.main, change:ACCENTS.teal.main };
+  MODELS.forEach(m => {
+    const c = colors[m.section];
+    const cell = document.createElement('div');
+    cell.className = 'ov-cell';
+    cell.innerHTML = `
+      <div class="ov-bar" style="background:${c}"></div>
+      <div>
+        <div class="ov-n" style="color:${c}55">0${m.id} — ${m.section.toUpperCase()}</div>
+        <div class="ov-name">${m.name}</div>
+        <div class="ov-q">${m.question}</div>
+      </div>
+    `;
+    cell.addEventListener('click', () => openModal(m.id));
+    grid.appendChild(cell);
+  });
+}
+
+// ── MODAL ────────────────────────────────────────────────
+function openModal(id) {
+  const m = MODELS.find(x => x.id === id);
+  if (!m) return;
+  const a = ACCENTS[m.accent];
+
+  $('#modalContent').innerHTML = `
+    <div class="mc-stripe" style="background:${a.main}"></div>
+    <div class="mc-head">
+      <div class="mc-eyebrow" style="color:${a.main}">Model 0${m.id} — ${m.section.charAt(0).toUpperCase()+m.section.slice(1)} Culture</div>
+      <div class="mc-title">${m.name}</div>
+      <div class="mc-q">${m.question}</div>
+      <div class="mc-tags">${m.tags.map(t => `<span class="mc-tag" style="color:${a.main};border-color:${a.main}44;background:${a.main}0d">${t}</span>`).join('')}</div>
+    </div>
+    <div>
+      <div class="mc-label" style="color:${a.main}">Overview</div>
+      <p class="mc-text">${m.overview}</p>
+
+      <div class="mc-label" style="color:${a.main}">The Problem It Solves</div>
+      <p class="mc-text">${m.problem}</p>
+
+      <div class="mc-label" style="color:${a.main}">Core Components</div>
+      <table class="mc-table">
+        <thead><tr>
+          <th style="color:${a.main}">Component</th>
+          <th style="color:${a.main}">Description</th>
+        </tr></thead>
+        <tbody>${m.components.map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</tbody>
+      </table>
+
+      <div class="mc-label" style="color:${a.main}">How to Apply It</div>
+      <ul class="mc-list">${m.process.map(p => `<li>${p}</li>`).join('')}</ul>
+
+      <div class="mc-label" style="color:${a.main}">When to Use It</div>
+      <ul class="mc-list">${m.when.map(w => `<li>${w}</li>`).join('')}</ul>
+
+      <div class="mc-label" style="color:${a.main}">Common Pitfalls</div>
+      <ul class="mc-list">${m.pitfalls.map(p => `<li>${p}</li>`).join('')}</ul>
+
+      <div class="mc-label" style="color:${a.main}">Who Uses It</div>
+      <div class="mc-pills" style="margin-bottom:1.5rem">${m.roles.map(r => `<span class="mc-pill" style="border-top:2px solid ${a.main}">${r}</span>`).join('')}</div>
+
+      <div class="mc-label" style="color:${a.main}">Tools and Software</div>
+      <div class="mc-pills">${m.software.map(s => `<span class="mc-pill">${s}</span>`).join('')}</div>
+    </div>
+  `;
+
+  $('#modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  $('#modalPanel').scrollTop = 0;
+}
+
+function closeModal() {
+  $('#modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function initModal() {
+  $('#modalClose').addEventListener('click', closeModal);
+  $('#modalOverlay').addEventListener('click', e => { if (e.target === $('#modalOverlay')) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+}
+
+// ── BACK TOP ─────────────────────────────────────────────
+function initBackTop() {
+  $('#toTop').addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+}
+
+// ── INIT ─────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initProgress();
+  initNav();
+  buildHeroCards();
+  buildCards();
+  buildOverview();
+  initModal();
+  initBackTop();
+  requestAnimationFrame(() => requestAnimationFrame(initObserver));
+});
+</script>
+</body>
+</html>
